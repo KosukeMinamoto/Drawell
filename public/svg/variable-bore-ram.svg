@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     version="1.1"
+     width="160px"
+     height="100px"
+     viewBox="0 0 160 100">
+
+  <g>
+    <!-- Variable Bore Ram - lime green/yellowish-green -->
+    <!-- Main body (lime green/yellowish-green) -->
+    <rect x="50" y="20" width="60" height="60" rx="3" fill="#ADFF2F" stroke="#000000" stroke-width="2"/>
+    
+    <!-- Horizontal extensions (left and right) -->
+    <!-- Left extension -->
+    <rect x="20" y="35" width="30" height="30" fill="#ADFF2F" stroke="#000000" stroke-width="2"/>
+    <rect x="15" y="38" width="5" height="24" rx="2" fill="#C0C0C0" stroke="#000000" stroke-width="1"/>
+    <circle cx="17.5" cy="45" r="1" fill="#000000"/>
+    <circle cx="17.5" cy="55" r="1" fill="#000000"/>
+    
+    <!-- Right extension -->
+    <rect x="110" y="35" width="30" height="30" fill="#ADFF2F" stroke="#000000" stroke-width="2"/>
+    <rect x="140" y="38" width="5" height="24" rx="2" fill="#C0C0C0" stroke="#000000" stroke-width="1"/>
+    <circle cx="142.5" cy="45" r="1" fill="#000000"/>
+    <circle cx="142.5" cy="55" r="1" fill="#000000"/>
+    
+    <!-- Circular light blue element with darker blue center (front face) -->
+    <circle cx="80" cy="50" r="12" fill="#87CEEB" stroke="#000000" stroke-width="1"/>
+    <circle cx="80" cy="50" r="6" fill="#4682B4"/>
+    
+    <!-- Top and bottom flanges -->
+    <rect x="45" y="15" width="70" height="5" fill="#555555" stroke="#000000" stroke-width="1"/>
+    <rect x="45" y="80" width="70" height="5" fill="#555555" stroke="#000000" stroke-width="1"/>
+    
+    <!-- Central vertical pipe (through center) -->
+    <rect x="77" y="0" width="6" height="100" fill="#888888" stroke="#000000" stroke-width="1"/>
+  </g>
+
+</svg>

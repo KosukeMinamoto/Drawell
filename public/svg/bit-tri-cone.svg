@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     version="1.1"
+     width="80px"
+     height="120px"
+     viewBox="0 0 80 120">
+
+  <g>
+    <!-- Tri-Cone Bit (1933) - Most common type -->
+    <!-- Threaded cylindrical top section (male threads) -->
+    <rect x="35" y="0" width="10" height="25" fill="#888888" stroke="#000000" stroke-width="1"/>
+    <!-- Thread representation -->
+    <line x1="35" y1="5" x2="45" y2="5" stroke="#000000" stroke-width="0.5"/>
+    <line x1="35" y1="10" x2="45" y2="10" stroke="#000000" stroke-width="0.5"/>
+    <line x1="35" y1="15" x2="45" y2="15" stroke="#000000" stroke-width="0.5"/>
+    <line x1="35" y1="20" x2="45" y2="20" stroke="#000000" stroke-width="0.5"/>
+    
+    <!-- Main bulbous body -->
+    <ellipse cx="40" cy="40" rx="25" ry="15" fill="#CCCCCC" stroke="#000000" stroke-width="2"/>
+    <rect x="15" y="30" width="50" height="20" fill="#CCCCCC"/>
+    
+    <!-- Three conical cutting elements arranged symmetrically -->
+    <!-- Left cone -->
+    <ellipse cx="25" cy="70" rx="12" ry="20" fill="#999999" stroke="#000000" stroke-width="1.5"/>
+    <path d="M 13 70 L 25 50 L 37 70 Z" fill="#999999" stroke="#000000" stroke-width="1.5"/>
+    <!-- Teeth/inserts on cone (concentric rings) -->
+    <circle cx="25" cy="60" r="2" fill="#000000"/>
+    <circle cx="25" cy="65" r="2.5" fill="#000000"/>
+    <circle cx="25" cy="70" r="3" fill="#000000"/>
+    <circle cx="25" cy="75" r="2.5" fill="#000000"/>
+    <circle cx="25" cy="80" r="2" fill="#000000"/>
+    
+    <!-- Right cone -->
+    <ellipse cx="55" cy="70" rx="12" ry="20" fill="#999999" stroke="#000000" stroke-width="1.5"/>
+    <path d="M 43 70 L 55 50 L 67 70 Z" fill="#999999" stroke="#000000" stroke-width="1.5"/>
+    <!-- Teeth/inserts on cone -->
+    <circle cx="55" cy="60" r="2" fill="#000000"/>
+    <circle cx="55" cy="65" r="2.5" fill="#000000"/>
+    <circle cx="55" cy="70" r="3" fill="#000000"/>
+    <circle cx="55" cy="75" r="2.5" fill="#000000"/>
+    <circle cx="55" cy="80" r="2" fill="#000000"/>
+    
+    <!-- Center cone (front) -->
+    <ellipse cx="40" cy="85" rx="10" ry="18" fill="#999999" stroke="#000000" stroke-width="1.5"/>
+    <path d="M 30 85 L 40 65 L 50 85 Z" fill="#999999" stroke="#000000" stroke-width="1.5"/>
+    <!-- Teeth/inserts on cone -->
+    <circle cx="40" cy="75" r="2" fill="#000000"/>
+    <circle cx="40" cy="80" r="2.5" fill="#000000"/>
+    <circle cx="40" cy="85" r="3" fill="#000000"/>
+    <circle cx="40" cy="90" r="2.5" fill="#000000"/>
+    <circle cx="40" cy="95" r="2" fill="#000000"/>
+    
+    <!-- Central flat face between cones -->
+    <ellipse cx="40" cy="70" rx="8" ry="5" fill="#AAAAAA" stroke="#000000" stroke-width="1"/>
+  </g>
+
+</svg>

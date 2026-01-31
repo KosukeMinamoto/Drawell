@@ -1,0 +1,11 @@
+<svg width="80" height="80" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <!-- 坑口装置参考図: 広い円錐ベース＋上部円筒＋フランジ -->
+  <!-- 円錐状の広いベース（上向きに絞り） -->
+  <path d="M 20 80 L 60 80 L 50 50 L 30 50 Z" fill="#4A4A4A" stroke="#2A2A2A" stroke-width="2"/>
+  <!-- 上部円筒ネック -->
+  <rect x="28" y="35" width="24" height="15" fill="#6A6A6A" stroke="#2A2A2A" stroke-width="2"/>
+  <!-- 上部フランジ（接続面） -->
+  <rect x="25" y="30" width="30" height="5" fill="#555555" stroke="#2A2A2A" stroke-width="1"/>
+  <!-- 中心軸（ウェルボア） -->
+  <line x1="40" y1="30" x2="40" y2="80" stroke="#2E5C8A" stroke-width="2" stroke-dasharray="2,2"/>
+</svg>

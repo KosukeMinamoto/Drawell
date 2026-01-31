@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Well completion: Cemented & perforated liner or casing – 仕上げ部分のみ -->
+<svg xmlns="http://www.w3.org/2000/svg"
+     version="1.1"
+     width="80px"
+     height="120px"
+     viewBox="0 0 80 120">
+
+  <defs>
+    <pattern id="pl-cement" patternUnits="userSpaceOnUse" width="4" height="4">
+      <circle cx="2" cy="2" r="0.5" fill="#999"/>
+      <circle cx="4" cy="2" r="0.5" fill="#999"/>
+      <circle cx="2" cy="4" r="0.5" fill="#999"/>
+    </pattern>
+  </defs>
+
+  <g>
+    <!-- ケーシング＋セメント（坑壁まで） -->
+    <rect x="15" y="0" width="50" height="120" fill="url(#pl-cement)" opacity="0.55" stroke="none"/>
+    <line x1="30" y1="0" x2="30" y2="120" stroke="#666" stroke-width="2.5"/>
+    <line x1="50" y1="0" x2="50" y2="120" stroke="#666" stroke-width="2.5"/>
+    <!-- ライナー（内側パイプ） -->
+    <rect x="33" y="0" width="14" height="120" fill="#fff" stroke="#888" stroke-width="1"/>
+    <!-- パーフォレーション（外向き三角・左右対・3組） -->
+    <path d="M 30 35 L 18 38 L 30 41 Z" fill="#fff" stroke="#333" stroke-width="1"/>
+    <path d="M 50 35 L 62 38 L 50 41 Z" fill="#fff" stroke="#333" stroke-width="1"/>
+    <path d="M 30 60 L 17 63 L 30 66 Z" fill="#fff" stroke="#333" stroke-width="1"/>
+    <path d="M 50 60 L 63 63 L 50 66 Z" fill="#fff" stroke="#333" stroke-width="1"/>
+    <path d="M 30 85 L 19 88 L 30 91 Z" fill="#fff" stroke="#333" stroke-width="1"/>
+    <path d="M 50 85 L 61 88 L 50 91 Z" fill="#fff" stroke="#333" stroke-width="1"/>
+    <!-- 下端 U字 -->
+    <path d="M 30 112 Q 40 120 50 112" fill="none" stroke="#666" stroke-width="2"/>
+  </g>
+</svg>

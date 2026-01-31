@@ -1,0 +1,32 @@
+No.,カテゴリ,部品名,英語名,備考
+1,バルブ,バルブ_ピストン型_A,Valve Piston Type A,長い赤い円筒形・上部にT字ハンドル・下部にピストンロッド・側面に2出口
+2,コネクタ,コネクタ_L型_オレンジ_A,Connector L-Type Orange A,小さなL字型オレンジのパイプコネクタ
+3,ウェルヘッド,ウェルヘッド_サポートリング_A,Wellhead Support Ring A,大きな平らな赤い円盤・同心円状のリブ
+4,コネクタ,コネクタ_四角_オレンジ_A,Connector Square Orange A,小さな平らなオレンジ色の四角バー
+5,コネクタ,コネクタ_四角_オレンジ_B,Connector Square Orange B,小さなオレンジ色の長方形・フランジ/スペーサー状
+6,ウェルヘッド,ウェルヘッド_ギア付_A,Wellhead with Gear A,赤い丸ボディ・中心にギア/インペラ・チョークバルブ状
+7,コネクタ,コネクタ_C型_オレンジ_A,Connector C-Type Orange A,小さなオレンジ色のC字型コネクタ/クランプ
+8,バルブ,バルブ_ファンネル型_A,Valve Funnel Type A,赤いファンネル/ベル型・上部にT字ハンドル・側面に接続部
+9,ウェルヘッド,ウェルヘッド_丸型_A,Wellhead Round Type A,小さな赤い円形・上面視・4接続点
+10,バルブ,バルブ_ボール型_A,Valve Ball Type A,小さな赤い球状バルブ・両側に接続部
+11,バルブ,バルブ_ボール型_B,Valve Ball Type B,小さな赤い球状バルブ・両側に接続部
+12,バルブ,バルブ_ボール型_C,Valve Ball Type C,小さな赤い球状バルブ・両側に接続部
+13,バルブ,バルブ_コニカル型_小_A,Valve Conical Small A,小さな赤い円錐/ベル型・T字ハンドル・両側接続部
+14,バルブ,バルブ_コニカル型_極小_A,Valve Conical Mini A,極小の赤いベル型・ハンドルなし・両側接続部
+15,ウェルヘッド,ウェルヘッド_コネクタ_S_A,Wellhead Connector S A,赤い円筒形・白ラベルにS・両側接続部
+16,BOP,BOP_ラム型_横_A,BOP Ram Type Horizontal A,赤い円筒形・両側に水平パイプ/フランジ・中央に円形ディテール
+17,BOP,BOP_ラム型_横_B,BOP Ram Type Horizontal B,同上
+18,BOP,BOP_ラム型_横_C,BOP Ram Type Horizontal C,赤い円筒形・両側に水平パイプ/フランジ
+19,BOP,BOP_ラム型_横_D,BOP Ram Type Horizontal D,同上
+20,BOP,BOP_スタック_A_トップ,BOP Stack A Top,赤い大きな円筒形・白ラベルにA
+21,BOP,BOP_スタック_R_上,BOP Stack R Upper,赤い円筒形・両側にRラベル付きパイプ・中央にX状マーク
+22,BOP,BOP_スタック_R_下,BOP Stack R Lower,同上
+23,BOP,BOP_スタック_S_ベース,BOP Stack S Base,赤い短い円筒形・白ラベルにS・下部銀色・側面に赤いバルブ・シアーラム/ベース状
+24,チューブ,チューブ_伸縮継手_A,Tubing Expansion Joint A,縦長・茶色がかったピンク・複数リブ（波状/フィン状）
+25,チューブ,チューブ_伸縮継手_B,Tubing Expansion Joint B,同上・より短い・リブ数少
+26,バルブ,バルブ_コニカル型_小_B,Valve Conical Small B,小さな赤いベル型・T字ハンドル・両側接続部
+27,バルブ,バルブ_コニカル型_小_C,Valve Conical Small C,同上
+28,パイプ,パイプ_サイド接続_A,Pipe Side Connection A,銀色円筒パイプ・側面から斜めに小パイプ・キル/チョークライン接続部状
+29,ドリル,ドリルパイプ_セグメント_A,Drill Pipe Segment A,長い水平な赤いパイプ・複数セグメント・薄茶ケーシング状
+30,ドリル,ドリルビット_A,Drill Bit A,緑色・先端がギザギザ歯状
+31,ダウンホール,ダウンホール_アセンブリ_A,Downhole Assembly A,縦長赤い円筒・一部薄茶ケーシング・内部に銀/白パイプ・下端緑のドリルビット状

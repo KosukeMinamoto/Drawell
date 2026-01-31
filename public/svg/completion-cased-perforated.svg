@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Well completion: Cased and perforated – 仕上げ部分のみ -->
+<svg xmlns="http://www.w3.org/2000/svg"
+     version="1.1"
+     width="80px"
+     height="120px"
+     viewBox="0 0 80 120">
+
+  <defs>
+    <pattern id="cp-cement" patternUnits="userSpaceOnUse" width="4" height="4">
+      <circle cx="2" cy="2" r="0.5" fill="#999"/>
+      <circle cx="4" cy="2" r="0.5" fill="#999"/>
+      <circle cx="2" cy="4" r="0.5" fill="#999"/>
+    </pattern>
+  </defs>
+
+  <g>
+    <!-- ケーシング（白パイプ）＋セメント -->
+    <rect x="28" y="0" width="24" height="120" fill="#fff" stroke="#ccc" stroke-width="1"/>
+    <rect x="10" y="0" width="60" height="120" fill="url(#cp-cement)" opacity="0.5" stroke="none"/>
+    <line x1="32" y1="0" x2="32" y2="120" stroke="#666" stroke-width="2"/>
+    <line x1="48" y1="0" x2="48" y2="120" stroke="#666" stroke-width="2"/>
+    <!-- パーフォレーション（外向き三角・左右対） -->
+    <path d="M 32 25 L 22 28 L 32 31 Z" fill="#fff" stroke="#333" stroke-width="1"/>
+    <path d="M 48 25 L 58 28 L 48 31 Z" fill="#fff" stroke="#333" stroke-width="1"/>
+    <path d="M 32 50 L 20 53 L 32 56 Z" fill="#fff" stroke="#333" stroke-width="1"/>
+    <path d="M 48 50 L 60 53 L 48 56 Z" fill="#fff" stroke="#333" stroke-width="1"/>
+    <path d="M 32 75 L 22 78 L 32 81 Z" fill="#fff" stroke="#333" stroke-width="1"/>
+    <path d="M 48 75 L 58 78 L 48 81 Z" fill="#fff" stroke="#333" stroke-width="1"/>
+    <path d="M 32 100 L 21 103 L 32 106 Z" fill="#fff" stroke="#333" stroke-width="1"/>
+    <path d="M 48 100 L 59 103 L 48 106 Z" fill="#fff" stroke="#333" stroke-width="1"/>
+    <!-- ケーシング下端（U字） -->
+    <path d="M 32 115 Q 40 120 48 115" fill="none" stroke="#666" stroke-width="2"/>
+  </g>
+</svg>

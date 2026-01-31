@@ -1,0 +1,16 @@
+.canvas-container {
+  flex: 1;
+  background-color: #ffffff;
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  overflow: hidden;
+  outline: none;
+  margin-top: 50px;
+}
+
+.canvas-text-edit {
+  background: #fff;
+  color: #000;
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Well completion: Pre-drilled or slotted liner  open hole with slotted liner only -->
+<svg xmlns="http://www.w3.org/2000/svg"
+     version="1.1"
+     width="80px"
+     height="120px"
+     viewBox="0 0 80 120">
+
+  <g>
+    <!-- Wellbore line from surface -->
+    <line x1="40" y1="0" x2="40" y2="20" stroke="#333" stroke-width="1.5"/>
+    <!-- Casing shoe symbol -->
+    <path d="M 40 20 L 36 28 L 44 28 Z" fill="#333" stroke="#333" stroke-width="1"/>
+    <!-- Open hole: irregular wall -->
+    <path d="M 26 28 Q 22 55 24 90 L 26 118 Q 28 120 40 119 L 54 119 Q 56 118 56 90 L 58 55 Q 60 28 54 28"
+          fill="#f5f5f0"
+          stroke="#8B7355"
+          stroke-width="1.5"/>
+    <!-- Slotted liner (dashed  pre-drilled/slotted) -->
+    <line x1="36" y1="28" x2="36" y2="120" stroke="#555" stroke-width="2" stroke-dasharray="5 4"/>
+    <line x1="44" y1="28" x2="44" y2="120" stroke="#555" stroke-width="2" stroke-dasharray="5 4"/>
+    <!-- Slot marks -->
+    <line x1="37" y1="40" x2="37" y2="48" stroke="#444" stroke-width="1"/>
+    <line x1="43" y1="62" x2="43" y2="70" stroke="#444" stroke-width="1"/>
+    <line x1="37" y1="85" x2="37" y2="93" stroke="#444" stroke-width="1"/>
+    <line x1="43" y1="105" x2="43" y2="113" stroke="#444" stroke-width="1"/>
+    <!-- Formation texture -->
+    <line x1="25" y1="50" x2="23" y2="54" stroke="#6b5344" stroke-width="0.8"/>
+    <line x1="55" y1="75" x2="57" y2="79" stroke="#6b5344" stroke-width="0.8"/>
+  </g>
+</svg>

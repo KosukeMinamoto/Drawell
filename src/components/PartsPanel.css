@@ -1,0 +1,231 @@
+.parts-panel {
+  width: 250px;
+  background-color: #ffffff;
+  border-right: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  margin-top: 50px;
+}
+
+.parts-panel h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 20px;
+  color: #333;
+  flex-shrink: 0;
+}
+
+.parts-tabs {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #e0e0e0;
+  overflow-y: auto;
+  max-height: 200px;
+  flex-shrink: 0;
+}
+
+.parts-tab {
+  padding: 10px 15px;
+  background-color: #f8f9fa;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+  cursor: pointer;
+  font-size: 12px;
+  color: #666;
+  transition: all 0.2s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.parts-tab:hover {
+  background-color: #e9ecef;
+  color: #333;
+}
+
+.parts-tab.active {
+  background-color: #4A90E2;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.parts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.part-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+  color: #333;
+}
+
+.part-button:hover {
+  background-color: #e9ecef;
+  border-color: #4A90E2;
+  transform: translateY(-2px);
+}
+
+.part-button:active {
+  transform: translateY(0);
+}
+
+.part-icon {
+  width: 48px;
+  height: 48px;
+  border: 2px solid #4A90E2;
+  background-color: #ffffff;
+}
+
+.rect-icon {
+  border-radius: 4px;
+}
+
+.circle-icon {
+  border-radius: 50%;
+}
+
+.line-icon {
+  width: 48px;
+  height: 2px;
+  background-color: #2E5C8A;
+  border: none;
+  margin: 23px 0;
+}
+
+.triangle-icon {
+  width: 0;
+  height: 0;
+  border-left: 24px solid transparent;
+  border-right: 24px solid transparent;
+  border-bottom: 40px solid #4A90E2;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+.trapezoid-icon {
+  width: 48px;
+  height: 30px;
+  background-color: #4A90E2;
+  border: 2px solid #2E5C8A;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+}
+
+.ellipse-icon {
+  width: 48px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.polygon-icon {
+  width: 48px;
+  height: 48px;
+  background-color: #4A90E2;
+  border: 2px solid #2E5C8A;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.text-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  background-color: #fff;
+}
+
+.text-icon::before {
+  content: 'Aa';
+}
+
+.omission-wave-icon {
+  width: 48px;
+  height: 12px;
+  border: none;
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      #000000 2px,
+      #000000 4px
+    );
+  background-size: 8px 2px;
+  background-position: 0 3px, 0 9px;
+  background-repeat: repeat-x;
+  position: relative;
+}
+
+.omission-wave-icon::after {
+  content: '';
+  position: absolute;
+  top: 9px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 2px,
+    #000000 2px,
+    #000000 4px
+  );
+  background-size: 8px 2px;
+}
+
+.omission-slash-icon {
+  width: 48px;
+  height: 12px;
+  border: none;
+  background: 
+    linear-gradient(to bottom right, transparent 48%, #000000 48%, #000000 52%, transparent 52%),
+    linear-gradient(to bottom right, transparent 48%, #000000 48%, #000000 52%, transparent 52%);
+  background-position: 0 0, 0 6px;
+  background-size: 100% 6px;
+}
+
+.omission-dot-icon {
+  width: 48px;
+  height: 12px;
+  border: none;
+  background: 
+    radial-gradient(circle, #000000 1.5px, transparent 1.5px),
+    radial-gradient(circle, #000000 1.5px, transparent 1.5px);
+  background-position: 0 3px, 0 9px;
+  background-size: 6px 6px;
+  background-repeat: repeat-x;
+}
+
+.part-icon-svg {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.part-icon-svg svg {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}

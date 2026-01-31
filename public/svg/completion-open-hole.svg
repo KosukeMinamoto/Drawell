@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Well completion: Open hole – 仕上げ部分のみ -->
+<svg xmlns="http://www.w3.org/2000/svg"
+     version="1.1"
+     width="80px"
+     height="120px"
+     viewBox="0 0 80 120">
+
+  <g>
+    <!-- Casing section (top) + casing shoe -->
+    <line x1="40" y1="0" x2="40" y2="20" stroke="#333" stroke-width="1.5"/>
+    <path d="M 40 20 L 36 28 L 44 28 Z" fill="#333" stroke="#333" stroke-width="1"/>
+    <line x1="32" y1="0" x2="32" y2="25" stroke="#666" stroke-width="2.5"/>
+    <line x1="48" y1="0" x2="48" y2="25" stroke="#666" stroke-width="2.5"/>
+    <path d="M 30 25 L 35 28 L 45 28 L 50 25" fill="none" stroke="#666" stroke-width="1.5"/>
+    <!-- Open hole: irregular borehole wall -->
+    <path d="M 25 28 Q 22 55 24 90 L 26 118 Q 28 120 35 119 L 45 119 Q 52 118 54 90 L 56 55 Q 58 28 55 28"
+          fill="#f5f5f0"
+          stroke="#8B7355"
+          stroke-width="1.5"/>
+    <!-- Formation texture -->
+    <line x1="26" y1="45" x2="24" y2="48" stroke="#6b5344" stroke-width="0.8"/>
+    <line x1="54" y1="65" x2="56" y2="68" stroke="#6b5344" stroke-width="0.8"/>
+    <line x1="25" y1="85" x2="23" y2="88" stroke="#6b5344" stroke-width="0.8"/>
+    <line x1="55" y1="100" x2="57" y2="102" stroke="#6b5344" stroke-width="0.8"/>
+  </g>
+</svg>

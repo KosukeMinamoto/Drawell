@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Well completion: Barefoot  open hole, no liner -->
+<svg xmlns="http://www.w3.org/2000/svg"
+     version="1.1"
+     width="80px"
+     height="120px"
+     viewBox="0 0 80 120">
+
+  <g>
+    <!-- Wellbore line from surface -->
+    <line x1="40" y1="0" x2="40" y2="22" stroke="#333" stroke-width="1.5"/>
+    <!-- Casing shoe symbol (downward triangle) -->
+    <path d="M 40 22 L 36 30 L 44 30 Z" fill="#333" stroke="#333" stroke-width="1"/>
+    <!-- Open hole: irregular borehole wall -->
+    <path d="M 28 30 Q 24 55 26 90 L 28 118 Q 30 120 40 119 L 52 119 Q 54 118 54 90 L 56 55 Q 58 30 52 30"
+          fill="#f5f5f0"
+          stroke="#8B7355"
+          stroke-width="1.5"/>
+    <!-- Formation texture (short lines) -->
+    <line x1="27" y1="48" x2="25" y2="52" stroke="#6b5344" stroke-width="0.8"/>
+    <line x1="53" y1="68" x2="55" y2="72" stroke="#6b5344" stroke-width="0.8"/>
+    <line x1="26" y1="88" x2="24" y2="92" stroke="#6b5344" stroke-width="0.8"/>
+    <line x1="54" y1="105" x2="56" y2="108" stroke="#6b5344" stroke-width="0.8"/>
+  </g>
+</svg>

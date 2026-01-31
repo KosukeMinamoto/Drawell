@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Well completion: Frac and pack / Cased hole gravel pack – 仕上げ部分のみ -->
+<svg xmlns="http://www.w3.org/2000/svg"
+     version="1.1"
+     width="100px"
+     height="120px"
+     viewBox="0 0 100 120"
+     preserveAspectRatio="xMidYMid meet">
+
+  <defs>
+    <pattern id="cfp-gravel" patternUnits="userSpaceOnUse" width="5" height="5">
+      <circle cx="1" cy="1" r="0.6" fill="#7a6b5a"/>
+      <circle cx="3" cy="2" r="0.6" fill="#7a6b5a"/>
+      <circle cx="2" cy="4" r="0.6" fill="#7a6b5a"/>
+    </pattern>
+    <pattern id="cfp-cement" patternUnits="userSpaceOnUse" width="4" height="4">
+      <circle cx="2" cy="2" r="0.5" fill="#999"/>
+      <circle cx="4" cy="2" r="0.5" fill="#999"/>
+      <circle cx="2" cy="4" r="0.5" fill="#999"/>
+    </pattern>
+  </defs>
+
+  <g>
+    <!-- ケーシング＋セメント -->
+    <rect x="15" y="0" width="70" height="120" fill="url(#cfp-cement)" opacity="0.45" stroke="none"/>
+    <line x1="38" y1="0" x2="38" y2="120" stroke="#666" stroke-width="2.5"/>
+    <line x1="62" y1="0" x2="62" y2="120" stroke="#666" stroke-width="2.5"/>
+    <rect x="40" y="0" width="20" height="120" fill="#fff" stroke="#ccc" stroke-width="1"/>
+    <!-- パーフォレーション（外向き三角・左右） -->
+    <path d="M 38 40 L 25 43 L 38 46 Z" fill="#fff" stroke="#333" stroke-width="1"/>
+    <path d="M 62 40 L 75 43 L 62 46 Z" fill="#fff" stroke="#333" stroke-width="1"/>
+    <path d="M 38 60 L 22 63 L 38 66 Z" fill="#fff" stroke="#333" stroke-width="1"/>
+    <path d="M 62 60 L 78 63 L 62 66 Z" fill="#fff" stroke="#333" stroke-width="1"/>
+    <path d="M 38 80 L 24 83 L 38 86 Z" fill="#fff" stroke="#333" stroke-width="1"/>
+    <path d="M 62 80 L 76 83 L 62 86 Z" fill="#fff" stroke="#333" stroke-width="1"/>
+    <!-- グラベル充填フラクチャ（楕円形） -->
+    <ellipse cx="50" cy="63" rx="38" ry="18" fill="url(#cfp-gravel)" opacity="0.8" stroke="#6b5d4f" stroke-width="1"/>
+    <!-- ケーシング内のグラベル（パーフォ付近） -->
+    <rect x="40" y="35" width="20" height="55" fill="url(#cfp-gravel)" opacity="0.7" stroke="none"/>
+    <!-- チュービング（中心） -->
+    <line x1="48" y1="0" x2="48" y2="120" stroke="#888" stroke-width="1.5"/>
+    <line x1="52" y1="0" x2="52" y2="120" stroke="#888" stroke-width="1.5"/>
+    <!-- 下端 U字 -->
+    <path d="M 38 108 Q 50 118 62 108" fill="none" stroke="#666" stroke-width="2"/>
+  </g>
+</svg>
