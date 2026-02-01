@@ -12,19 +12,25 @@ const ImageShape = React.forwardRef(({ shape, isSelected, onSelect, onDragEnd, o
     image.src = shape.src
   }, [shape.src])
   if (!img) return null
+  const iw = shape.width || 100
+  const ih = shape.height || 100
   return (
     <Image
       ref={ref}
       image={img}
       x={shape.x}
       y={shape.y}
-      width={shape.width || 100}
-      height={shape.height || 100}
+      offsetX={iw / 2}
+      offsetY={ih / 2}
+      width={iw}
+      height={ih}
+      scaleX={shape.scaleX ?? 1}
+      scaleY={shape.scaleY ?? 1}
       rotation={shape.rotation || 0}
       opacity={shape.opacity !== undefined ? shape.opacity : 1}
       draggable
-      stroke={isSelected ? '#FF6B6B' : undefined}
-      strokeWidth={isSelected ? 3 : 0}
+      stroke={isSelected ? '#FF6B6B' : (shape.stroke || 'transparent')}
+      strokeWidth={isSelected ? 3 : (shape.strokeWidth ?? 0)}
       onClick={(e) => onSelect(e, shape)}
       onTap={(e) => onSelect(e, shape)}
       onDragEnd={(e) => onDragEnd(e, shape)}
@@ -43,10 +49,12 @@ const Canvas = React.forwardRef(({
   onUpdateShape, 
   rotateMode = false,
   onRotateModeChange,
+  onFlipModeRequest,
 }, ref) => {
   const stageRef = useRef(null)
   const transformerRef = useRef(null)
   const shapeRefs = useRef({})
+  const borderClickTimeoutRef = useRef(null)
   const [editingTextId, setEditingTextId] = useState(null)
   const [textOverlayRect, setTextOverlayRect] = useState(null)
   const textareaRef = useRef(null)
@@ -65,11 +73,13 @@ const Canvas = React.forwardRef(({
     const stage = stageRef.current.getStage()
     const container = stage.container()
     const rect = container.getBoundingClientRect()
+    const tw = Math.max(80, shape.width || 120)
+    const th = Math.max(24, shape.height || 32)
     setTextOverlayRect({
-      left: rect.left + shape.x,
-      top: rect.top + shape.y,
-      width: Math.max(80, shape.width || 120),
-      height: Math.max(24, shape.height || 32),
+      left: rect.left + shape.x - tw / 2,
+      top: rect.top + shape.y - th / 2,
+      width: tw,
+      height: th,
       fontSize: shape.fontSize || 16,
       text: shape.text !== undefined ? shape.text : '',
     })
@@ -108,12 +118,12 @@ const Canvas = React.forwardRef(({
     const lineLength = shape.casingLineLength ?? (shape.height != null ? shape.height - CASING_TRIANGLE_HEIGHT : CASING_LINE_DEFAULT)
     const triW = shape.casingTriangleWidth ?? shape.width ?? CASING_TRIANGLE_WIDTH_DEFAULT
     const triH = CASING_TRIANGLE_HEIGHT
-    const stroke = isSelected ? '#FF6B6B' : '#000000'
-    const strokeWidth = isSelected ? 3 : 2
-    const triStroke = isSelected ? '#FF6B6B' : '#23445d'
-    // 三角形底部の丸み（ライナー接続部の円錐状表現）
+    const stroke = isSelected ? '#FF6B6B' : (shape.stroke || '#000000')
+    const strokeWidth = isSelected ? 3 : (shape.strokeWidth ?? 2)
+    const triStroke = isSelected ? '#FF6B6B' : (shape.stroke || '#23445d')
     const roundBulge = Math.min(4, triH * 0.15)
     const triBottomY = lineLength + triH
+    const totalH = lineLength + triH + roundBulge
 
     return (
       <Group
@@ -127,6 +137,10 @@ const Canvas = React.forwardRef(({
         }}
         x={shape.x}
         y={shape.y}
+        offsetX={triW / 2}
+        offsetY={totalH / 2}
+        scaleX={shape.scaleX ?? 1}
+        scaleY={shape.scaleY ?? 1}
         rotation={shape.rotation || 0}
         opacity={shape.opacity !== undefined ? shape.opacity : 1}
         draggable
@@ -193,6 +207,10 @@ const Canvas = React.forwardRef(({
     const baseProps = {
       x: shape.x,
       y: shape.y,
+      offsetX: width / 2,
+      offsetY: height / 2,
+      scaleX: shape.scaleX ?? 1,
+      scaleY: shape.scaleY ?? 1,
       rotation: shape.rotation || 0,
       opacity: shape.opacity !== undefined ? shape.opacity : 1,
       stroke,
@@ -300,14 +318,14 @@ const Canvas = React.forwardRef(({
         if (visible.length === 0) return null
         let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity
         visible.forEach(s => {
-          const x = s.x ?? 0
-          const y = s.y ?? 0
+          const cx = s.x ?? 0
+          const cy = s.y ?? 0
           const w = s.width ?? 80
           const h = s.height ?? 80
-          minX = Math.min(minX, x)
-          minY = Math.min(minY, y)
-          maxX = Math.max(maxX, x + w)
-          maxY = Math.max(maxY, y + h)
+          minX = Math.min(minX, cx - w / 2)
+          minY = Math.min(minY, cy - h / 2)
+          maxX = Math.max(maxX, cx + w / 2)
+          maxY = Math.max(maxY, cy + h / 2)
         })
         return { minX, minY, maxX, maxY }
       }
@@ -383,13 +401,21 @@ const Canvas = React.forwardRef(({
     }
   }
 
-  // Transformerの枠をクリックして回転モードを切り替え
+  // 枠 1回クリック → 回転モード切替 / 2回クリック → 反転モード
   const handleTransformerBorderClick = useCallback((e) => {
-    if (onRotateModeChange) {
-      onRotateModeChange(!rotateMode)
-    }
     e.cancelBubble = true
-  }, [rotateMode, onRotateModeChange])
+    if (borderClickTimeoutRef.current) {
+      clearTimeout(borderClickTimeoutRef.current)
+      borderClickTimeoutRef.current = null
+      if (onFlipModeRequest) onFlipModeRequest()
+      return
+    }
+    borderClickTimeoutRef.current = setTimeout(() => {
+      borderClickTimeoutRef.current = null
+      if (onRotateModeChange) onRotateModeChange(!rotateMode)
+    }, 250)
+  }, [rotateMode, onRotateModeChange, onFlipModeRequest])
+
 
   const handleShapeDragEnd = (e, shape) => {
     onUpdateShape(shape.id, {
@@ -403,25 +429,26 @@ const Canvas = React.forwardRef(({
     const scaleX = node.scaleX()
     const scaleY = node.scaleY()
     const rotation = node.rotation()
+    const absSX = Math.abs(scaleX)
+    const absSY = Math.abs(scaleY)
 
-    // スケールをリセットして、width/heightを更新
     node.scaleX(1)
     node.scaleY(1)
 
     const updates = {
       x: node.x(),
       y: node.y(),
+      scaleX: scaleX < 0 ? -1 : (shape.scaleX ?? 1),
+      scaleY: scaleY < 0 ? -1 : (shape.scaleY ?? 1),
     }
 
-    // 回転角度も保存
     if (rotateMode && rotation !== 0) {
       updates.rotation = rotation
-      node.rotation(0) // リセット
+      node.rotation(0)
     }
 
     if (shape.type === 'circle' || shape.type === 'ellipse') {
-      // 円・楕円の場合は平均スケールを使用してアスペクト比を維持
-      const avgScale = (scaleX + scaleY) / 2
+      const avgScale = (absSX + absSY) / 2
       if (shape.type === 'circle') {
         const newRadius = Math.max(2.5, (shape.width / 2) * avgScale)
         updates.width = newRadius * 2
@@ -431,35 +458,30 @@ const Canvas = React.forwardRef(({
         updates.height = Math.max(5, shape.height * avgScale)
       }
     } else if (shape.type === 'line') {
-      // 線の場合は幅のみ変更
-      updates.width = Math.max(10, shape.width * scaleX)
+      updates.width = Math.max(10, shape.width * absSX)
     } else if (shape.type === 'text') {
-      updates.width = Math.max(20, (shape.width || 120) * scaleX)
-      updates.height = Math.max(12, (shape.height || 32) * scaleY)
-      updates.fontSize = Math.max(8, Math.round((shape.fontSize || 16) * Math.min(scaleX, scaleY)))
+      updates.width = Math.max(20, (shape.width || 120) * absSX)
+      updates.height = Math.max(12, (shape.height || 32) * absSY)
+      updates.fontSize = Math.max(8, Math.round((shape.fontSize || 16) * Math.min(absSX, absSY)))
     } else if (shape.type === 'omission-wave' || shape.type === 'omission-slash' || shape.type === 'omission-dot') {
-      // 省略記号の場合
-      updates.width = Math.max(20, shape.width * scaleX)
-      updates.height = Math.max(10, shape.height * scaleY)
+      updates.width = Math.max(20, shape.width * absSX)
+      updates.height = Math.max(10, shape.height * absSY)
     } else if (CASING_TYPES.includes(shape.type)) {
-      // ケーシング: 縦は線のみ、横は三角形のみ伸ばす
       const lineLen = shape.casingLineLength ?? (shape.height != null ? shape.height - CASING_TRIANGLE_HEIGHT : CASING_LINE_DEFAULT)
       const triW = shape.casingTriangleWidth ?? shape.width ?? CASING_TRIANGLE_WIDTH_DEFAULT
-      updates.casingLineLength = Math.max(10, lineLen * scaleY)
-      updates.casingTriangleWidth = Math.max(10, triW * scaleX)
+      updates.casingLineLength = Math.max(10, lineLen * absSY)
+      updates.casingTriangleWidth = Math.max(10, triW * absSX)
       updates.width = updates.casingTriangleWidth
       updates.height = updates.casingLineLength + CASING_TRIANGLE_HEIGHT
     } else if (shape.type === 'image') {
-      updates.width = Math.max(5, (shape.width || 100) * scaleX)
-      updates.height = Math.max(5, (shape.height || 100) * scaleY)
+      updates.width = Math.max(5, (shape.width || 100) * absSX)
+      updates.height = Math.max(5, (shape.height || 100) * absSY)
     } else if (shape.type !== 'rect' && shape.type !== 'circle' && shape.type !== 'line' && shape.type !== 'triangle' && shape.type !== 'trapezoid' && shape.type !== 'ellipse' && shape.type !== 'polygon') {
-      // SVGアイコンの場合
-      updates.width = Math.max(5, shape.width * scaleX)
-      updates.height = Math.max(5, shape.height * scaleY)
+      updates.width = Math.max(5, shape.width * absSX)
+      updates.height = Math.max(5, shape.height * absSY)
     } else {
-      // その他の基本図形の場合は自由にサイズ変更
-      updates.width = Math.max(5, shape.width * scaleX)
-      updates.height = Math.max(5, shape.height * scaleY)
+      updates.width = Math.max(5, shape.width * absSX)
+      updates.height = Math.max(5, shape.height * absSY)
     }
 
     onUpdateShape(shape.id, updates)
@@ -498,10 +520,8 @@ const Canvas = React.forwardRef(({
             // border要素を取得
             const border = transformer.findOne('.border')
             if (border) {
-              // 既存のイベントリスナーを削除
               border.off('click')
               border.off('tap')
-              // 新しいイベントリスナーを追加
               border.on('click', handleTransformerBorderClick)
               border.on('tap', handleTransformerBorderClick)
             }
@@ -630,6 +650,10 @@ const Canvas = React.forwardRef(({
                     }}
                     x={shape.x}
                     y={shape.y}
+                    offsetX={(shape.width || 120) / 2}
+                    offsetY={(shape.height || 32) / 2}
+                    scaleX={shape.scaleX ?? 1}
+                    scaleY={shape.scaleY ?? 1}
                     rotation={shape.rotation || 0}
                     opacity={shape.opacity !== undefined ? shape.opacity : 1}
                     text={shape.text !== undefined && shape.text !== '' ? shape.text : '\u00A0'}
@@ -650,7 +674,9 @@ const Canvas = React.forwardRef(({
               )
             }
 
-            // 基本図形の場合
+            // 基本図形: X,Y は中心、回転も中心まわり（offset で実現）
+            const w = shape.width || 80
+            const h = shape.height || 60
             const commonProps = {
               key: shape.id,
               ref: (node) => {
@@ -662,11 +688,15 @@ const Canvas = React.forwardRef(({
               },
               x: shape.x,
               y: shape.y,
+              offsetX: w / 2,
+              offsetY: h / 2,
+              scaleX: shape.scaleX ?? 1,
+              scaleY: shape.scaleY ?? 1,
               rotation: shape.rotation || 0,
               opacity: shape.opacity !== undefined ? shape.opacity : 1,
-              fill: shape.fill,
-              stroke: (isSelected || isMultiSelected) ? '#FF6B6B' : shape.stroke,
-              strokeWidth: (isSelected || isMultiSelected) ? 3 : shape.strokeWidth,
+              fill: (shape.fill && shape.fill !== 'transparent') ? shape.fill : 'transparent',
+              stroke: (isSelected || isMultiSelected) ? '#FF6B6B' : (shape.stroke || '#2E5C8A'),
+              strokeWidth: (isSelected || isMultiSelected) ? 3 : (shape.strokeWidth ?? 2),
               draggable: true,
               onClick: (e) => handleShapeClick(e, shape),
               onTap: (e) => handleShapeClick(e, shape),
@@ -690,11 +720,15 @@ const Canvas = React.forwardRef(({
                 />
               )
             } else if (shape.type === 'line') {
+              const lw = shape.width || 100
+              const lh = shape.height || 2
               return (
                 <Line
                   {...commonProps}
-                  points={[0, 0, shape.width || 100, 0]}
-                  fill={shape.fill}
+                  offsetX={lw / 2}
+                  offsetY={lh / 2}
+                  points={[0, 0, lw, 0]}
+                  fill={(shape.fill && shape.fill !== 'transparent') ? shape.fill : 'transparent'}
                 />
               )
             } else if (shape.type === 'triangle') {
@@ -754,8 +788,8 @@ const Canvas = React.forwardRef(({
               return (
                 <Rect
                   {...commonProps}
-                  width={shape.width}
-                  height={shape.height}
+                  width={w}
+                  height={h}
                 />
               )
             }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Cement in annulus - annular space between casing and formation (cross-section) -->
+<svg xmlns="http://www.w3.org/2000/svg"
+     version="1.1"
+     width="60"
+     height="120"
+     viewBox="0 0 60 120">
+
+  <g>
+    <!-- Annular cement: inner = casing (straight), outer = wellbore wall (irregular) -->
+    <path d="M 32 0 L 32 120 L 56 118 L 58 95 L 55 72 L 58 50 L 54 28 L 57 8 L 52 0 Z"
+          fill="#8a8a8a"
+          stroke="#5a5a5a"
+          stroke-width="1"/>
+    <line x1="32" y1="0" x2="32" y2="120" stroke="#666" stroke-width="1" opacity="0.5"/>
+  </g>
+</svg>

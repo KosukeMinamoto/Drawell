@@ -22,6 +22,10 @@ function Toolbar({
   onRedo,
   canUndo,
   canRedo,
+  flipMode,
+  onFlipHorizontal,
+  onFlipVertical,
+  onFlipModeExit,
 }) {
   const fileInputRef = useRef(null)
   const [exportOpen, setExportOpen] = useState(false)
@@ -119,6 +123,31 @@ function Toolbar({
         >
           {rotateMode ? '🔄 Rotate' : '↔️ Resize'}
         </button>
+        {flipMode && hasSingle && (
+          <>
+            <button
+              className="toolbar-button toolbar-button-edit"
+              onClick={() => onFlipHorizontal(selectedShape.id)}
+              title="Flip horizontal"
+            >
+              ⇄ Flip H
+            </button>
+            <button
+              className="toolbar-button toolbar-button-edit"
+              onClick={() => onFlipVertical(selectedShape.id)}
+              title="Flip vertical"
+            >
+              ⇅ Flip V
+            </button>
+            <button
+              className="toolbar-button toolbar-button-ghost"
+              onClick={() => onFlipModeExit && onFlipModeExit()}
+              title="Exit flip mode"
+            >
+              ✕
+            </button>
+          </>
+        )}
         <button
           className="toolbar-button toolbar-button-edit"
           onClick={() => hasSingle && onDuplicateShape(selectedShape.id)}

@@ -15,6 +15,7 @@ function App() {
   const [historyIndex, setHistoryIndex] = useState(0)
   const [clipboard, setClipboard] = useState(null)
   const [rotateMode, setRotateMode] = useState(false)
+  const [flipMode, setFlipMode] = useState(false)
   const addToHistory = useCallback((newShapes) => {
     const newHistory = history.slice(0, historyIndex + 1)
     newHistory.push(JSON.parse(JSON.stringify(newShapes)))
@@ -59,15 +60,15 @@ function App() {
       const newShape = {
         id: Date.now(),
         type,
-        x: 100 + Math.random() * 200,
-        y: 100 + Math.random() * 200,
+        x: 200 + Math.random() * 200,
+        y: 200 + Math.random() * 200,
         width: basicShapes[type].width,
         height: basicShapes[type].height,
         fill: 'transparent',
         stroke: '#2E5C8A',
         strokeWidth: 2,
         zIndex: shapes.length,
-        ...(isText && { text: 'テキスト', fontSize: 16 }),
+        ...(isText && { text: 'Text', fontSize: 16 }),
       }
       const newShapes = [...shapes, newShape]
       setShapes(newShapes)
@@ -79,8 +80,8 @@ function App() {
       const newShape = {
         id: Date.now(),
         type,
-        x: 100 + Math.random() * 200,
-        y: 100 + Math.random() * 200,
+        x: 200 + Math.random() * 200,
+        y: 200 + Math.random() * 200,
         width: 100,
         height: 20,
         fill: 'transparent',
@@ -98,8 +99,8 @@ function App() {
       const newShape = {
         id: Date.now(),
         type: 'casing',
-        x: 100 + Math.random() * 200,
-        y: 100 + Math.random() * 200,
+        x: 200 + Math.random() * 200,
+        y: 200 + Math.random() * 200,
         width: 43,
         height: 240,
         casingLineLength: 200,
@@ -141,8 +142,8 @@ function App() {
       const newShape = {
         id: Date.now(),
         type,
-        x: 100 + Math.random() * 200,
-        y: 100 + Math.random() * 200,
+        x: 200 + Math.random() * 200,
+        y: 200 + Math.random() * 200,
         width,
         height,
         fill: '#4A90E2',
@@ -157,12 +158,11 @@ function App() {
       addToHistory(newShapes)
     } catch (error) {
       console.error('Error adding shape:', error)
-      // エラー時はデフォルトサイズで追加
       const newShape = {
         id: Date.now(),
         type,
-        x: 100 + Math.random() * 200,
-        y: 100 + Math.random() * 200,
+        x: 200 + Math.random() * 200,
+        y: 200 + Math.random() * 200,
         width: 80,
         height: 80,
         fill: '#4A90E2',
@@ -200,6 +200,22 @@ function App() {
     addToHistory(newShapes)
     setSelectedShape(null)
     setSelectedShapes([])
+  }
+
+  const handleFlipHorizontal = (id) => {
+    const shape = shapes.find(s => s.id === id)
+    if (!shape || shape.type === 'group') return
+    const next = (shape.scaleX ?? 1) * -1
+    updateShape(id, { scaleX: next })
+    setFlipMode(false)
+  }
+
+  const handleFlipVertical = (id) => {
+    const shape = shapes.find(s => s.id === id)
+    if (!shape || shape.type === 'group') return
+    const next = (shape.scaleY ?? 1) * -1
+    updateShape(id, { scaleY: next })
+    setFlipMode(false)
   }
 
   const duplicateShape = (id) => {
@@ -282,43 +298,35 @@ function App() {
     const shapesToAlign = selectedShapes.map(s => shapes.find(shape => shape.id === s.id)).filter(Boolean)
     if (shapesToAlign.length < 2) return
 
+    const getW = (s) => s.width || 80
+    const getH = (s) => s.height || 80
     let referenceValue = 0
     if (alignment === 'top') {
-      referenceValue = Math.min(...shapesToAlign.map(s => s.y))
+      referenceValue = Math.min(...shapesToAlign.map(s => s.y - getH(s) / 2))
     } else if (alignment === 'bottom') {
-      referenceValue = Math.max(...shapesToAlign.map(s => s.y + (s.height || 80)))
+      referenceValue = Math.max(...shapesToAlign.map(s => s.y + getH(s) / 2))
     } else if (alignment === 'middle') {
-      const centers = shapesToAlign.map(s => s.y + (s.height || 80) / 2)
-      referenceValue = (Math.min(...centers) + Math.max(...centers)) / 2
+      referenceValue = shapesToAlign.reduce((a, s) => a + s.y, 0) / shapesToAlign.length
     } else if (alignment === 'left') {
-      referenceValue = Math.min(...shapesToAlign.map(s => s.x))
+      referenceValue = Math.min(...shapesToAlign.map(s => s.x - getW(s) / 2))
     } else if (alignment === 'right') {
-      referenceValue = Math.max(...shapesToAlign.map(s => s.x + (s.width || 80)))
+      referenceValue = Math.max(...shapesToAlign.map(s => s.x + getW(s) / 2))
     } else if (alignment === 'center') {
-      const centers = shapesToAlign.map(s => s.x + (s.width || 80) / 2)
-      referenceValue = (Math.min(...centers) + Math.max(...centers)) / 2
+      referenceValue = shapesToAlign.reduce((a, s) => a + s.x, 0) / shapesToAlign.length
     }
 
     const newShapes = shapes.map(shape => {
       const selectedShape = shapesToAlign.find(s => s.id === shape.id)
       if (!selectedShape) return shape
-
       const updates = { ...shape }
-      
-      if (alignment === 'top') {
-        updates.y = referenceValue
-      } else if (alignment === 'bottom') {
-        updates.y = referenceValue - (shape.height || 80)
-      } else if (alignment === 'middle') {
-        updates.y = referenceValue - (shape.height || 80) / 2
-      } else if (alignment === 'left') {
-        updates.x = referenceValue
-      } else if (alignment === 'right') {
-        updates.x = referenceValue - (shape.width || 80)
-      } else if (alignment === 'center') {
-        updates.x = referenceValue - (shape.width || 80) / 2
-      }
-
+      const w = getW(shape)
+      const h = getH(shape)
+      if (alignment === 'top') updates.y = referenceValue + h / 2
+      else if (alignment === 'bottom') updates.y = referenceValue - h / 2
+      else if (alignment === 'middle') updates.y = referenceValue
+      else if (alignment === 'left') updates.x = referenceValue + w / 2
+      else if (alignment === 'right') updates.x = referenceValue - w / 2
+      else if (alignment === 'center') updates.x = referenceValue
       return updates
     })
 
@@ -360,7 +368,7 @@ function App() {
 
   const handleSave = () => {
     const projectData = {
-      version: '1.0',
+      version: '2.0',
       createdAt: new Date().toISOString(),
       shapes: shapes,
     }
@@ -378,10 +386,16 @@ function App() {
 
   const handleLoad = (data) => {
     if (data.shapes && Array.isArray(data.shapes)) {
-      const shapesWithZIndex = data.shapes.map((shape, index) => ({
-        ...shape,
-        zIndex: shape.zIndex !== undefined ? shape.zIndex : index,
-      }))
+      const version = parseFloat(data.version) || 1
+      const shapesWithZIndex = data.shapes.map((shape, index) => {
+        let s = { ...shape, zIndex: shape.zIndex !== undefined ? shape.zIndex : index }
+        if (shape.type !== 'group' && version < 2) {
+          const w = s.width ?? 80
+          const h = s.height ?? 80
+          s = { ...s, x: (s.x ?? 0) + w / 2, y: (s.y ?? 0) + h / 2 }
+        }
+        return s
+      })
       setShapes(shapesWithZIndex)
       setSelectedShape(null)
       setSelectedShapes([])
@@ -417,8 +431,8 @@ function App() {
             const newShape = {
               id: Date.now(),
               type: 'image',
-              x: 100 + Math.random() * 100,
-              y: 100 + Math.random() * 100,
+              x: 200 + Math.random() * 200,
+              y: 200 + Math.random() * 200,
               width: w,
               height: h,
               src: dataUrl,
@@ -508,8 +522,8 @@ function App() {
                     const newShape = {
                       id: Date.now(),
                       type: 'image',
-                      x: 100,
-                      y: 100,
+                      x: 200,
+                      y: 200,
                       width: w,
                       height: h,
                       src: dataUrl,
@@ -565,6 +579,10 @@ function App() {
         onRedo={redo}
         canUndo={historyIndex > 0}
         canRedo={historyIndex < history.length - 1}
+        flipMode={flipMode}
+        onFlipHorizontal={handleFlipHorizontal}
+        onFlipVertical={handleFlipVertical}
+        onFlipModeExit={() => setFlipMode(false)}
       />
       <PartsPanel onAddShape={addShape} />
       <Canvas
@@ -572,11 +590,18 @@ function App() {
         shapes={shapes}
         selectedShape={selectedShape}
         selectedShapes={selectedShapes}
-        onSelectShape={setSelectedShape}
-        onSelectShapes={setSelectedShapes}
+        onSelectShape={(s) => {
+          setSelectedShape(s)
+          if (!s) setFlipMode(false)
+        }}
+        onSelectShapes={(ss) => {
+          setSelectedShapes(ss)
+          if (!ss?.length) setFlipMode(false)
+        }}
         onUpdateShape={updateShape}
         rotateMode={rotateMode}
         onRotateModeChange={setRotateMode}
+        onFlipModeRequest={() => setFlipMode(true)}
       />
       <PropertiesPanel
         selectedShape={selectedShapeLive}

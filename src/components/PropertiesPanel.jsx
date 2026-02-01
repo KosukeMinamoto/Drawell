@@ -116,6 +116,18 @@ function PropertiesPanel({
                   className="property-input"
                 />
               </div>
+              {['rect', 'circle', 'line', 'triangle', 'trapezoid', 'ellipse', 'polygon'].includes(selectedShape.type) && (
+                <div className="property-item">
+                  <label>Fill color</label>
+                  <input
+                    type="color"
+                    value={(selectedShape.fill && selectedShape.fill !== 'transparent') ? selectedShape.fill : '#e8e8e8'}
+                    onChange={(e) => onUpdateShape(selectedShape.id, { fill: e.target.value })}
+                    className="property-input property-color-input"
+                    title="Transparent shows as gray in picker"
+                  />
+                </div>
+              )}
               <div className="property-item">
                 <label>Stroke color</label>
                 <input

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bridge and cement plug - plug inside casing (cross-section) -->
+<svg xmlns="http://www.w3.org/2000/svg"
+     version="1.1"
+     width="80"
+     height="28"
+     viewBox="0 0 80 28">
+
+  <g>
+    <!-- Cement plug (horizontal bar = cross-section of plug in casing) -->
+    <rect x="8" y="4" width="64" height="20" rx="2"
+          fill="#9a9a9a"
+          stroke="#5a5a5a"
+          stroke-width="1.5"/>
+    <line x1="12" y1="8" x2="68" y2="8" stroke="#888" stroke-width="1"/>
+    <line x1="12" y1="20" x2="68" y2="20" stroke="#888" stroke-width="1"/>
+  </g>
+</svg>

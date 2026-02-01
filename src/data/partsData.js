@@ -83,10 +83,12 @@ export const partsCategories = [
   },
   {
     id: 'casing-tubing',
-    label: 'Casing / Tubing',
+    label: 'Casing / Tubing / Cementing',
     parts: [
       { type: 'casing', label: 'Casing' },
       { type: 'tubing', label: 'Tubing' },
+      { type: 'cement', label: 'Cement (annulus)' },
+      { type: 'cement-plug', label: 'Cement plug' },
     ]
   },
   {
@@ -103,13 +105,6 @@ export const partsCategories = [
       { type: 'pressure-relief-valve', label: 'Pressure Relief Valve' },
       { type: 'plug-valve', label: 'Plug Valve' },
       { type: 'control-valve', label: 'Control Valve' },
-    ]
-  },
-  {
-    id: 'reservoir',
-    label: 'Reservoir Interface',
-    parts: [
-      { type: 'perforation', label: 'Perforation' },
     ]
   },
   {

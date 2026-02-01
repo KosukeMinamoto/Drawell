@@ -150,8 +150,12 @@ const SvgIcon = React.forwardRef(({ shape, isSelected, onSelect, onDragEnd, onTr
       image={image}
       x={shape.x}
       y={shape.y}
+      offsetX={displayWidth / 2}
+      offsetY={displayHeight / 2}
       width={displayWidth}
       height={displayHeight}
+      scaleX={shape.scaleX ?? 1}
+      scaleY={shape.scaleY ?? 1}
       rotation={shape.rotation || 0}
       opacity={shape.opacity !== undefined ? shape.opacity : 1}
       draggable={true}
@@ -159,8 +163,8 @@ const SvgIcon = React.forwardRef(({ shape, isSelected, onSelect, onDragEnd, onTr
       onTap={(e) => onSelect(e, shape)}
       onDragEnd={(e) => onDragEnd(e, shape)}
       onTransformEnd={(e) => onTransformEnd && onTransformEnd(e, shape)}
-      stroke={isSelected ? '#FF6B6B' : 'transparent'}
-      strokeWidth={isSelected ? 3 : 0}
+      stroke={isSelected ? '#FF6B6B' : (shape.stroke || 'transparent')}
+      strokeWidth={isSelected ? 3 : (shape.strokeWidth ?? 0)}
     />
   )
 })
